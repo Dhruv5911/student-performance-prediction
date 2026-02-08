@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Performance Predictor</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <h1 class="logo">📚 Student Performance Predictor</h1>
+            <ul class="nav-links">
+                <li><a href="#dashboard" class="active">Dashboard</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="section">
+            <div class="card">
+                <h2>Predict Student Performance</h2>
+                <p class="subtitle">Enter student details to predict marks and performance status</p>
+                
+                <form method="POST" class="form">
+                    <div class="form-group">
+                        <label for="study">📖 Study Hours:</label>
+                        <input type="number" id="study" step="0.1" name="study" placeholder="e.g., 5" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="attendance">✓ Attendance (%):</label>
+                        <input type="number" id="attendance" step="0.1" name="attendance" placeholder="e.g., 85" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="sleep">😴 Sleep Hours:</label>
+                        <input type="number" id="sleep" step="0.1" name="sleep" placeholder="e.g., 7" required>
+                    </div>
+
+                    <button type="submit" class="btn-primary">🎯 Predict Marks</button>
+                </form>
+
+                {% if prediction %}
+                    <div class="result-card">
+                        <h3>📊 Prediction Results</h3>
+                        <div class="result-item">
+                            <span class="label">Predicted Marks:</span>
+                            <span class="value marks">{{ prediction }}</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="label">Status:</span>
+                            <span class="value status {% if status == 'PASS' %}pass{% else %}fail{% endif %}">{{ status }}</span>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section">
+            <div class="card about-card">
+                <h2>ℹ️ About This Project</h2>
+                
+                <div class="about-content">
+                    <h3>Project Overview</h3>
+                    <p>
+                        The <strong>Student Performance Predictor</strong> is an intelligent machine learning application 
+                        designed to predict student academic performance based on key factors that influence learning outcomes.
+                    </p>
+
+                    <h3>How It Works</h3>
+                    <ul class="features-list">
+                        <li><strong>Study Hours:</strong> The amount of time dedicated to studying</li>
+                        <li><strong>Attendance:</strong> The percentage of classes attended by the student</li>
+                        <li><strong>Sleep Hours:</strong> The daily hours of sleep for proper cognitive function</li>
+                    </ul>
+                    <p>
+                        The application uses a trained machine learning model to analyze these three critical factors 
+                        and predict the expected marks a student will achieve. It also provides a clear PASS/FAIL status 
+                        based on the predicted marks.
+                    </p>
+
+                    <h3>Key Features</h3>
+                    <ul class="features-list">
+                        <li>✨ Real-time prediction powered by ML algorithms</li>
+                        <li>📱 User-friendly and responsive interface</li>
+                        <li>📈 Instant performance feedback</li>
+                        <li>🎯 Accurate predictions based on historical data</li>
+                    </ul>
+
+                    <h3>Technology Stack</h3>
+                    <div class="tech-stack">
+                        <span class="tech-badge">Python</span>
+                        <span class="tech-badge">Flask</span>
+                        <span class="tech-badge">Machine Learning</span>
+                        <span class="tech-badge">HTML/CSS</span>
+                        <span class="tech-badge">Pandas</span>
+                        <span class="tech-badge">Scikit-learn</span>
+                    </div>
+
+                    <div class="creator-info">
+                        <p><strong>Made by Dhruv Saldi</strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2026 Student Performance Predictor | Created by <strong>Dhruv Saldi</strong></p>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                    // Update active link
+                    document.querySelectorAll('.nav-links a').forEach(link => link.classList.remove('active'));
+                    this.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
